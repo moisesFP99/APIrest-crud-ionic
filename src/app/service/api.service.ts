@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,22 +6,23 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
   private api: string = 'https://jsonplaceholder.typicode.com/';
+  private options: any = { headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=UTF-8' }) };
 
   constructor(private http: HttpClient) { }
 
-  createData() {
-
+  createData(data: any) {
+    return this.http.post(`${this.api}posts`, JSON.stringify(data), this.options);
   }
 
   readData() {
-    return this.http.get('${this.api}posts/1');
+    return this.http.get(`${this.api}posts`);
   }
 
-  updateData() {
-
+  updateData(data: any) {
+    return this.http.put(`${this.api}posts/1`, JSON.stringify(data), this.options);
   }
 
   deleteData() {
-
+    return this.http.delete(`${this.api}posts/1`);
   }
 }
