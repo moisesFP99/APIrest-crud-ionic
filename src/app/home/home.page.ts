@@ -1,3 +1,4 @@
+import { ApiService } from './../service/api.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private apiService: ApiService) {
+    // this.createData();
+    this.readData();
+    // this.updateData();
+    // this.deleteData();
+  }
+
+  readData() {
+    this.apiService.readData().subscribe(data => {
+      console.log(data);
+    });
+  }
 
 }
